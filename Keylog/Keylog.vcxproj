@@ -131,9 +131,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FileConverter.h" />
     <ClInclude Include="keylogger.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FileConverter.cpp" />
     <ClCompile Include="keylogger.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>

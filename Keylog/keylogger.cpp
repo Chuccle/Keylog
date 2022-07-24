@@ -41,10 +41,8 @@ void Keylogging::populateSet() {
 	for (int j = 0; j < inputArray.size(); j++) {
 
 		for (int k = 0; k < inputArray[k].size(); k++) {
+			//loop through every element in the array, populate set with all possible values
 
-			//determines first number since first number is only at index 0
-
-			//if not then delete the number from the passcodeSet
 			passcodeSet.insert(inputArray[j][k]);
 
 		}
@@ -140,8 +138,13 @@ void Keylogging::identifyRest() {
 
 				}
 
-				passcodeSet.insert(i);
 
+				if (checkRelativePos(i)) {
+					passcodeSet.insert(i);
+				}
+
+
+				break;
 			}
 
 		}
@@ -153,3 +156,33 @@ void Keylogging::identifyRest() {
 	identifyRest();
 
 };
+
+
+
+
+bool Keylogging::checkRelativePos(int num) {
+
+
+	for (int j = 0; j < inputArray.size(); j++) {
+
+		if (inputArray[j][2] == num) {
+
+			if (!(passcodeSet.contains(inputArray[j][0]) && (passcodeSet.contains(inputArray[j][1])))) {
+
+				return false;
+
+			}
+
+		}
+
+	}
+
+
+
+
+	return true;
+
+}
+
+
+

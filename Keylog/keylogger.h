@@ -27,6 +27,7 @@ private:
 
 	void identifyRest();
 
+	bool checkRelativePos(int num);
 
 public:
 

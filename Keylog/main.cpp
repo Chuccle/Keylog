@@ -15,7 +15,6 @@ int main()
 	// Ensure that the file is not empty and also only contains valid characters.
 	// Use file directory as parameter.
 	// restructure and validation of input file
-	// CHECK FOR HIDDEN SPACES AND NEWLINES (breaks program)
 	// check for duplicate elements within an attempt
 
 	std::vector<int> keyAttempt;
@@ -29,14 +28,33 @@ int main()
 
 	Keylogging k;
 
-	my_file->open("C:/Users/charl/Source/Repos/Keylog/tests/56.txt", std::ios::in);
+	my_file->open("C:/Users/charl/Source/Repos/Keylog/tests/test2.txt", std::ios::in);
 
 	char ch;
 
 	// iterate until end of file
-	while (!my_file->eof())
+	while (1)
 
 	{
+
+		if (my_file->eof()) {
+
+			if (keyAttempt.size() == 3) {
+
+
+				finput.push_back(keyAttempt);
+
+				keyAttempt.clear();
+
+			}
+
+
+			break;
+
+		}
+
+
+
 		// read a character and adsign it to the ch
 		my_file->get(ch);
 
@@ -54,6 +72,27 @@ int main()
 		}
 		// delimit our vector by newlines
 		else {
+
+
+
+			if (keyAttempt.size() < 3) {
+
+
+				break;
+
+			}
+
+
+
+			for (int i = 0; i < 3; i++) {
+
+				std::cout << keyAttempt[i] << std::endl;
+
+
+			}
+
+			// if array is empty or not full, we don't want to add it to the array.
+
 
 			// we then add the keySequence vector to the finput 2d vector
 			finput.push_back(keyAttempt);

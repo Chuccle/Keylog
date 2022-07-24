@@ -10,6 +10,7 @@ struct Data {
 
 	std::vector<std::vector<int>> inputArray;
 
+	int UB;
 
 };
 
@@ -17,24 +18,40 @@ struct Data {
 std::unordered_set<int> Keylogging::compute(std::vector<std::vector<int>> const& input) {
 
 
-	passcodeSet = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
 	inputArray = input;
 
+	populateSet();
+
+	UB = passcodeSet.size();
 
 	identifyFirst();
 
-
 	identifySecond();
 
-
 	identifyRest();
-
 
 	return passcodeSet;
 
 }
 
+
+void Keylogging::populateSet() {
+
+
+	for (int j = 0; j < inputArray.size(); j++) {
+
+		for (int k = 0; k < inputArray[k].size(); k++) {
+
+			//determines first number since first number is only at index 0
+
+			//if not then delete the number from the passcodeSet
+			passcodeSet.insert(inputArray[j][k]);
+
+		}
+
+	}
+
+};
 
 
 void Keylogging::identifyFirst() {
@@ -101,7 +118,7 @@ void Keylogging::identifyRest() {
 
 	//base condition. assumes we use every number possibility.
 
-	if (passcodeSet.size() == 10) {
+	if (passcodeSet.size() == UB) {
 		return;
 	}
 

@@ -14,7 +14,13 @@ private:
 
 	std::vector<std::vector<int>> inputArray;
 
+	int UB;
+
+
+
 	// Helper functions, will mutate passcodeSet
+	void populateSet();
+
 	void identifyFirst();
 
 	void identifySecond();

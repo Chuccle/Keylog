@@ -15,9 +15,9 @@ int main()
 
 	std::unordered_set test = keylogger.compute(finput);
 
-	for (int const& swag : test)
+	for (int const& inner : test)
 	{
-		std::cout << swag << ' ';
+		std::cout << inner << ' ';
 
 	}
 

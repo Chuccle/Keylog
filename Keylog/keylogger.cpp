@@ -86,11 +86,8 @@ void Keylogging::identifySecond() {
 
 		for (int j = 0; j < inputArray.size(); j++) {
 
-
-
 			// We can determine that the second number will always be at index 1
 			if (inputArray[j][1] == i) {
-
 
 				// We only want to find numbers that have the same first number as the first number in the sequence
 				if (!passcodeSet.contains(inputArray[j][0])) {

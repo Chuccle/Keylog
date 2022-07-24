@@ -62,6 +62,13 @@ std::vector<std::vector<int>> FileConverter::parse(std::string const& filename)
 
 			}
 
+			//TOOD:
+
+			// Check for duplicate elements within the buffer array
+			// Check for characters that aren't numbers within the buffer array
+
+
+
 			// We then add the keySequence vector to the finput 2d vector
 			finput.push_back(keyAttempt);
 

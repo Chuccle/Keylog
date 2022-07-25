@@ -134,7 +134,7 @@ void Keylogging::identifyRest() {
 
 bool Keylogging::checkRelativePos(int num) {
 
-	// Loops through the entirety of inputArray to ensure the number is not preceded by numbers that are not in the passcodeSet.
+	// Loops through the entirety of inputArray to ensure the candidate is not preceded by numbers that are not in the passcodeSet.
 	for (int i = 0; i < inputArray.size(); i++) {
 
 		if (inputArray[i][2] == num) {

@@ -25,8 +25,16 @@ std::vector<std::vector<int>> FileConverter::parse(const std::string& filename)
 
 	file->open(filename, std::ios::in);
 
-	char ch;
+	if (file->fail())
+	{
+		std::cout << "File not found" << std::endl;
+		exit(EXIT_FAILURE);
 
+	}
+
+
+
+	char ch;
 
 	while (1)
 
@@ -39,18 +47,17 @@ std::vector<std::vector<int>> FileConverter::parse(const std::string& filename)
 		}
 
 
-		// Read a character and adsign it to the ch
+		// Read a character and assign it to the ch
 		file->get(ch);
 
 
 		if (keyAttempt.size() == 3) {
 
-
-
 			if (duplicateCheck(keyAttempt)) {
 
 				std::cout << "Duplicate elements in sequence at line " << finput.size() + 1;
 				exit(EXIT_FAILURE);
+
 			}
 
 			// We then add the keySequence vector to the finput 2d vector

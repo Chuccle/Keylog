@@ -14,7 +14,7 @@ private:
 
 	std::vector<std::vector<int>> inputArray;
 
-	int UB;
+	int UB = 0;
 
 	// Helper functions, will mutate passcodeSet
 	void populateSet();
@@ -30,7 +30,7 @@ private:
 public:
 
 	// Accepts a vector of vectors of integers as input, and returns an unordered set.
-	std::unordered_set<int> compute(std::vector<std::vector<int>> const& input);
+	std::unordered_set<int> compute(const std::vector<std::vector<int>>& input);
 
 };
 

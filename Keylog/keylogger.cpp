@@ -1,26 +1,16 @@
 #include "keylogger.h"
 #include <iostream>
 
-struct Data {
 
-
-	std::unordered_set<int> passcodeSet;
-
-	std::vector<std::vector<int>> inputArray;
-
-	int UB;
-
-};
-
-
-std::unordered_set<int> Keylogging::compute(std::vector<std::vector<int>> const& input) {
-
+// Expensive return and input so we make use of reference variables
+std::unordered_set<int> Keylogging::compute(const std::vector<std::vector<int>>& input) {
 
 	inputArray = input;
 
 	populateSet();
 
-	UB = passcodeSet.size();
+	// Removes warning because we are assigning an int from a long long
+	UB = (int)passcodeSet.size();
 
 	identifyFirst();
 
@@ -35,10 +25,9 @@ std::unordered_set<int> Keylogging::compute(std::vector<std::vector<int>> const&
 
 void Keylogging::populateSet() {
 
-
 	for (int j = 0; j < inputArray.size(); j++) {
 
-		for (int k = 0; k < inputArray[k].size(); k++) {
+		for (int k = 0; k < inputArray[j].size(); k++) {
 
 			// Loop through every element in the array, populate set with all possible values
 			passcodeSet.insert(inputArray[j][k]);
@@ -52,12 +41,11 @@ void Keylogging::populateSet() {
 
 void Keylogging::identifyFirst() {
 
-
 	for (int i = 0; i < 10; i++) {
 
 		for (int j = 0; j < inputArray.size(); j++) {
 
-			for (int k = 0; k < inputArray[k].size(); k++) {
+			for (int k = 0; k < inputArray[j].size(); k++) {
 
 				// Determines first number since first number is only at index 0
 
@@ -80,7 +68,6 @@ void Keylogging::identifyFirst() {
 
 
 void Keylogging::identifySecond() {
-
 
 	for (int i = 0; i < 10; i++) {
 
@@ -121,12 +108,14 @@ void Keylogging::identifyRest() {
 
 		for (int j = 0; j < inputArray.size(); j++) {
 
-
+			// If a number exists at the end of a sequence
 			if (inputArray[j][2] == i) {
 
 
 				if (checkRelativePos(i)) {
+
 					passcodeSet.insert(i);
+
 				}
 
 

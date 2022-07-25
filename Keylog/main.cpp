@@ -7,19 +7,19 @@
 int main()
 {
 
-	// Minimum length password = 5 characters
-
 	FileConverter fileConverter;
 
 	Keylogging keylogger;
 
-	std::vector<std::vector<int>> finput = fileConverter.parse("C:/Users/charl/Source/Repos/Keylog/tests/test.txt");
+	std::vector<std::vector<int>> finput = fileConverter.parse("C:/Users/charl/Source/Repos/Keylog/tests/test2.txt");
 
 	std::unordered_set test = keylogger.compute(finput);
 
+	std::cout << test.size() << std::endl;
+
 	for (int const& inner : test)
 	{
-		std::cout << inner << ' ';
+		std::cout << inner;
 
 	}
 

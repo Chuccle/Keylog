@@ -1,24 +1,32 @@
 #include "FileConverter.h"
+#include <algorithm>
+#include <unordered_set>
 
-
-struct Data {
-
-	// Use this vector as a buffer for each line in the file.
-	std::vector<int> keyAttempt;
-
-	std::vector<std::vector<int>> finput;
-
-};
-
-
-std::vector<std::vector<int>> FileConverter::parse(std::string const& filename)
+// Expensive return and input so we make use of reference variables
+std::vector<std::vector<int>> FileConverter::parse(const std::string& filename)
 {
 
+	// Unordered set is constant whereas normal set is (log(n))
+	std::unordered_set <char> acceptableChars{
+		'0',
+		'1',
+		'2',
+		'3',
+		'4',
+		'5',
+		'6',
+		'7',
+		'8',
+		'9'
+	};
+
+	// Could be too big for stack?
 	std::unique_ptr<std::fstream> file(new std::fstream);
 
 	file->open(filename, std::ios::in);
 
 	char ch;
+
 
 	while (1)
 
@@ -27,15 +35,6 @@ std::vector<std::vector<int>> FileConverter::parse(std::string const& filename)
 		// Iterate until end of file
 		if (file->eof()) {
 
-			// Ensure that the latest line is read and stored in the vector
-			if (keyAttempt.size() == 3) {
-
-				finput.push_back(keyAttempt);
-
-				keyAttempt.clear();
-
-			}
-
 			break;
 		}
 
@@ -43,8 +42,27 @@ std::vector<std::vector<int>> FileConverter::parse(std::string const& filename)
 		// Read a character and adsign it to the ch
 		file->get(ch);
 
-		// If the character is a number, add it to the keySequence vector
-		if (ch != '\n')
+
+		if (keyAttempt.size() == 3) {
+
+
+
+			if (duplicateCheck(keyAttempt)) {
+
+				std::cout << "Duplicate elements in sequence at line " << finput.size() + 1;
+				exit(EXIT_FAILURE);
+			}
+
+			// We then add the keySequence vector to the finput 2d vector
+			finput.push_back(keyAttempt);
+
+			// Clear the keySequence buffer vector
+			keyAttempt.clear();
+
+		}
+
+		// We only want characters that are numbers 0-9
+		if (acceptableChars.contains(ch))
 		{
 
 			// We have to recast the char to an int
@@ -52,36 +70,27 @@ std::vector<std::vector<int>> FileConverter::parse(std::string const& filename)
 			keyAttempt.push_back(atoi(&ch));
 
 		}
-		else {
-
-			// If array is empty or not full, we don't want to add it to the array.
-			if (keyAttempt.size() < 3) {
-
-
-				break;
-
-			}
-
-			//TOOD:
-
-			// Check for duplicate elements within the buffer array
-			// Check for characters that aren't numbers within the buffer array
-
-
-
-			// We then add the keySequence vector to the finput 2d vector
-			finput.push_back(keyAttempt);
-
-
-			// Clear the keySequence vector
-			keyAttempt.clear();
-
-
-		}
 
 	}
 
-	file->close();
-
 	return finput;
+}
+
+
+bool FileConverter::duplicateCheck(std::vector<int> vecBuf) {
+
+	// We sort the vector, which will pair duplicate elements together
+	std::sort(vecBuf.begin(), vecBuf.end());
+
+	// We then iterate through the vector second and third elements and check if an element is equal to the previous element
+	for (int i = 1; i < vecBuf.size(); i++) {
+
+		if (vecBuf[i] == vecBuf[i - 1]) {
+
+			return true;
+		}
+	}
+
+	return false;
+
 }

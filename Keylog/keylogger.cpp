@@ -25,12 +25,12 @@ std::unordered_set<int> Keylogging::compute(const std::vector<std::vector<int>>&
 
 void Keylogging::populateSet() {
 
-	for (int j = 0; j < inputArray.size(); j++) {
+	for (int i = 0; i < inputArray.size(); i++) {
 
-		for (int k = 0; k < inputArray[j].size(); k++) {
+		for (int j = 0; j < inputArray[i].size(); j++) {
 
 			// Loop through every element in the array, populate set with all possible values
-			passcodeSet.insert(inputArray[j][k]);
+			passcodeSet.insert(inputArray[i][j]);
 
 		}
 
@@ -103,7 +103,6 @@ void Keylogging::identifyRest() {
 		return;
 	}
 
-
 	for (int i = 0; i < 10; i++) {
 
 		for (int j = 0; j < inputArray.size(); j++) {
@@ -117,7 +116,6 @@ void Keylogging::identifyRest() {
 					passcodeSet.insert(i);
 
 				}
-
 
 				break;
 			}

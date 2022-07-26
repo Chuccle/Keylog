@@ -55,7 +55,7 @@ std::vector<std::vector<int>> FileConverter::parse(const std::string& filename)
 
 			if (duplicateCheck(keyAttempt)) {
 
-				std::cout << "Duplicate elements in sequence at line " << finput.size() + 1;
+				std::cout << "Duplicate elements in sequence at sequence " << finput.size() + 1;
 				exit(EXIT_FAILURE);
 
 			}
@@ -79,6 +79,16 @@ std::vector<std::vector<int>> FileConverter::parse(const std::string& filename)
 		}
 
 	}
+
+
+
+	if (finput.empty()) {
+
+		std::cout << "No sequences found" << std::endl;
+		exit(EXIT_FAILURE);
+	}
+
+
 
 	return finput;
 }
